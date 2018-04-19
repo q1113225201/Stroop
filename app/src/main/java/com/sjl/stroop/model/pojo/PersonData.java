@@ -30,11 +30,13 @@ public class PersonData {
     private String stroopB;
     //C组测试数据
     private String stroopC;
+    //测试结果：true 已完成 false 未完成
+    private boolean stroopState;
 
-    @Generated(hash = 1442824864)
+    @Generated(hash = 1978155298)
     public PersonData(String idcard, String name, String birth, String gender,
             String job, String education, String stroopA, String stroopB,
-            String stroopC) {
+            String stroopC, boolean stroopState) {
         this.idcard = idcard;
         this.name = name;
         this.birth = birth;
@@ -44,81 +46,70 @@ public class PersonData {
         this.stroopA = stroopA;
         this.stroopB = stroopB;
         this.stroopC = stroopC;
+        this.stroopState = stroopState;
     }
-
     @Generated(hash = 212076876)
     public PersonData() {
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBirth() {
-        return birth;
-    }
-
-    public void setBirth(String birth) {
-        this.birth = birth;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public String getEducation() {
-        return education;
-    }
-
-    public void setEducation(String education) {
-        this.education = education;
-    }
-
-    public String getStroopA() {
-        return stroopA;
-    }
-
-    public void setStroopA(String stroopA) {
-        this.stroopA = stroopA;
-    }
-
-    public String getStroopB() {
-        return stroopB;
-    }
-
-    public void setStroopB(String stroopB) {
-        this.stroopB = stroopB;
-    }
-
-    public String getStroopC() {
-        return stroopC;
-    }
-
-    public void setStroopC(String stroopC) {
-        this.stroopC = stroopC;
-    }
-
     public String getIdcard() {
         return this.idcard;
     }
-
     public void setIdcard(String idcard) {
         this.idcard = idcard;
     }
+    public String getName() {
+        return this.name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getBirth() {
+        return this.birth;
+    }
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+    public String getGender() {
+        return this.gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    public String getJob() {
+        return this.job;
+    }
+    public void setJob(String job) {
+        this.job = job;
+    }
+    public String getEducation() {
+        return this.education;
+    }
+    public void setEducation(String education) {
+        this.education = education;
+    }
+    public String getStroopA() {
+        return this.stroopA;
+    }
+    public void setStroopA(String stroopA) {
+        this.stroopA = stroopA;
+    }
+    public String getStroopB() {
+        return this.stroopB;
+    }
+    public void setStroopB(String stroopB) {
+        this.stroopB = stroopB;
+    }
+    public String getStroopC() {
+        return this.stroopC;
+    }
+    public void setStroopC(String stroopC) {
+        this.stroopC = stroopC;
+    }
+    public boolean getStroopState() {
+        return this.stroopState;
+    }
+    public void setStroopState(boolean stroopState) {
+        this.stroopState = stroopState;
+    }
+
 }

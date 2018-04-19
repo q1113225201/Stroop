@@ -33,6 +33,7 @@ public class PersonDataDao extends AbstractDao<PersonData, Void> {
         public final static Property StroopA = new Property(6, String.class, "stroopA", false, "STROOP_A");
         public final static Property StroopB = new Property(7, String.class, "stroopB", false, "STROOP_B");
         public final static Property StroopC = new Property(8, String.class, "stroopC", false, "STROOP_C");
+        public final static Property StroopState = new Property(9, boolean.class, "stroopState", false, "STROOP_STATE");
     }
 
 
@@ -56,7 +57,8 @@ public class PersonDataDao extends AbstractDao<PersonData, Void> {
                 "\"EDUCATION\" TEXT," + // 5: education
                 "\"STROOP_A\" TEXT," + // 6: stroopA
                 "\"STROOP_B\" TEXT," + // 7: stroopB
-                "\"STROOP_C\" TEXT);"); // 8: stroopC
+                "\"STROOP_C\" TEXT," + // 8: stroopC
+                "\"STROOP_STATE\" INTEGER NOT NULL );"); // 9: stroopState
     }
 
     /** Drops the underlying database table. */
@@ -113,6 +115,7 @@ public class PersonDataDao extends AbstractDao<PersonData, Void> {
         if (stroopC != null) {
             stmt.bindString(9, stroopC);
         }
+        stmt.bindLong(10, entity.getStroopState() ? 1L: 0L);
     }
 
     @Override
@@ -163,6 +166,7 @@ public class PersonDataDao extends AbstractDao<PersonData, Void> {
         if (stroopC != null) {
             stmt.bindString(9, stroopC);
         }
+        stmt.bindLong(10, entity.getStroopState() ? 1L: 0L);
     }
 
     @Override
@@ -181,7 +185,8 @@ public class PersonDataDao extends AbstractDao<PersonData, Void> {
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // education
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // stroopA
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // stroopB
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // stroopC
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // stroopC
+            cursor.getShort(offset + 9) != 0 // stroopState
         );
         return entity;
     }
@@ -197,6 +202,7 @@ public class PersonDataDao extends AbstractDao<PersonData, Void> {
         entity.setStroopA(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setStroopB(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setStroopC(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setStroopState(cursor.getShort(offset + 9) != 0);
      }
     
     @Override

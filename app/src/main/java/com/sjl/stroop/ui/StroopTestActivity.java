@@ -13,11 +13,11 @@ import com.sjl.stroop.presenter.TestPresenter;
  * @author 林zero
  * @date 2018/4/18
  */
-public class TestActivity extends BaseActivity<TestMvpView, TestPresenter> implements TestMvpView {
+public class StroopTestActivity extends BaseActivity<TestMvpView, TestPresenter> implements TestMvpView {
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_test;
+        return R.layout.activity_stroop_test;
     }
 
     @Override

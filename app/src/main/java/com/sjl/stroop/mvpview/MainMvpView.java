@@ -1,6 +1,9 @@
 package com.sjl.stroop.mvpview;
 
 import com.sjl.platform.base.MvpView;
+import com.sjl.stroop.model.pojo.PersonData;
+
+import java.util.List;
 
 /**
  * 首页
@@ -10,4 +13,5 @@ import com.sjl.platform.base.MvpView;
  */
 
 public interface MainMvpView extends MvpView {
+    void onPersonDataListSuccess(List<PersonData> list);
 }

@@ -3,7 +3,8 @@
     package="com.sjl.stroop">
 
     <application
-        android:allowBackup="true"
+        android:name=".App"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -17,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.AddPersonActivity" />
-        <activity android:name=".ui.TestActivity"></activity>
+        <activity android:name=".ui.StroopTestActivity" />
+        <activity android:name=".ui.StroopResultActivity"></activity>
     </application>
 
 </manifest>
