@@ -20,7 +20,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
      */
     public void fetchPersonDataList(String key) {
         List<PersonData> list = ModelHelper.fetchPersonDataList(key);
-        list.add(new PersonData("","name0","19930504","男","工作","教育","","","",true));
+        /*list.add(new PersonData("","name0","19930504","男","工作","教育","","","",true));
         list.add(new PersonData("","name1","19930504","男","工作","教育","","","",true));
         list.add(new PersonData("","name2","19930504","男","工作","教育","","","",false));
         list.add(new PersonData("","name3","19930504","男","工作","教育","","","",false));
@@ -31,6 +31,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         list.add(new PersonData("","name8","19930504","男","工作","教育","","","",true));
         list.add(new PersonData("","name9","19930504","男","工作","教育","","","",true));
         list.add(new PersonData("","name10","19930504","男","工作","教育","","","",true));
+        */
         getMvpView().onPersonDataListSuccess(list);
     }
 }

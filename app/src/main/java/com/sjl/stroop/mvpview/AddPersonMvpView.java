@@ -10,4 +10,6 @@ import com.sjl.platform.base.MvpView;
  */
 
 public interface AddPersonMvpView extends MvpView {
+    void onAddPersonSuccess();
+    void onAddPersonFailure(String msg);
 }

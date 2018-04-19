@@ -35,4 +35,5 @@ dependencies {
     implementation project(':libplatform')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'org.greenrobot:greendao:3.2.2'
+    compile 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'
 }

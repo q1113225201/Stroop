@@ -2,6 +2,7 @@ package com.sjl.stroop;
 
 import android.app.Application;
 
+import com.sjl.platform.PlatformInit;
 import com.sjl.stroop.model.GlobalData;
 
 /**
@@ -22,6 +23,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
+        PlatformInit.init(this);
         GlobalData.getInstance().init();
     }
 }

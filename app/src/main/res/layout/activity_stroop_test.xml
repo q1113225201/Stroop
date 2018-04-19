@@ -1,9 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.sjl.stroop.ui.StroopTestActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/llTitle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/blue"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivSetting"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="测试"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:src="@drawable/ic_add"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTask"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/llTitle"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvTaskA"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="任务A"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvTaskB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="任务B"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvTaskC"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="任务C"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <Button
+            android:id="@+id/btnRed"
+            style="@style/ButtonChoose"
+            android:text="红" />
+
+        <Button
+            android:id="@+id/btnGreen"
+            style="@style/ButtonChoose"
+            android:text="绿" />
+
+        <Button
+            android:id="@+id/btnYellow"
+            style="@style/ButtonChoose"
+            android:text="黄" />
+
+        <Button
+            android:id="@+id/btnBlue"
+            style="@style/ButtonChoose"
+            android:text="蓝" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/llBottom"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_blue_circle_10"
+        android:text="结束练习"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnStop"
+        android:layout_below="@+id/llTask">
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="红"
+            android:textSize="80sp" />
+    </RelativeLayout>
+</RelativeLayout>
