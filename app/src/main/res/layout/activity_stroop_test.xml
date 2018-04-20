@@ -74,6 +74,11 @@
             android:text="任务C"
             android:textSize="15sp" />
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/llTask"
+        android:id="@+id/tvHint"/>
 
     <LinearLayout
         android:id="@+id/llBottom"
@@ -119,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/btnStop"
-        android:layout_below="@+id/llTask">
+        android:layout_below="@+id/tvHint">
 
         <TextView
             android:id="@+id/tvContent"
@@ -127,7 +132,6 @@
             android:layout_height="100dp"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="红"
             android:textSize="80sp" />
     </RelativeLayout>
 </RelativeLayout>

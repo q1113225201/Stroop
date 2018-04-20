@@ -62,11 +62,41 @@ public class StroopData {
         this.list = list;
     }
 
-    public class StroopDataItem {
+    public static class StroopDataItem {
+        //方块颜色
+        private int boxColor;
+        //文字颜色
+        private int textColor;
+        //文字
+        private String text;
         //测试结果
         private boolean result;
         //使用时间 毫秒
         private int time;
+
+        public int getBoxColor() {
+            return boxColor;
+        }
+
+        public void setBoxColor(int boxColor) {
+            this.boxColor = boxColor;
+        }
+
+        public int getTextColor() {
+            return textColor;
+        }
+
+        public void setTextColor(int textColor) {
+            this.textColor = textColor;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
 
         public boolean isResult() {
             return result;

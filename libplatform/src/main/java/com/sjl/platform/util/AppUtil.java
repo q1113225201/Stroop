@@ -1,7 +1,9 @@
 package com.sjl.platform.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -49,5 +51,18 @@ public class AppUtil {
         WindowManager.LayoutParams params = activity.getWindow().getAttributes();
         params.alpha = alpha;
         activity.getWindow().setAttributes(params);
+    }
+
+    /**
+     * 获取屏幕宽高
+     *
+     * @param context
+     * @return
+     */
+    public static Point getScreen(Context context) {
+        Point point = new Point();
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getSize(point);
+        return point;
     }
 }
