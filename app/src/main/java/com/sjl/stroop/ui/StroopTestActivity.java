@@ -2,6 +2,7 @@ package com.sjl.stroop.ui;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
@@ -100,6 +101,13 @@ public class StroopTestActivity extends BaseActivity<TestMvpView, TestPresenter>
     @Override
     protected void initView() {
         personData= JsonUtils.toObject(getIntent().getStringExtra("personData"),PersonData.class);
+        if(!TextUtils.isEmpty(personData.getStroopA())&&!TextUtils.isEmpty(personData.getStroopB())&&!TextUtils.isEmpty(personData.getStroopC())){
+            Bundle bundle = new Bundle();
+            bundle.putString("personData", JsonUtils.toJson(personData));
+            AppUtil.startActivity(activity, tvContent, StroopResultActivity.class, bundle);
+            finish();
+            return;
+        }
         tvContent.measure(0,0);
         startX = -tvContent.getMeasuredWidth();
         endX = AppUtil.getScreen(this).x+tvContent.getMeasuredWidth();
@@ -167,7 +175,10 @@ public class StroopTestActivity extends BaseActivity<TestMvpView, TestPresenter>
             DialogUtil.showDialog(this, "测试结束，查看测试结果。", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    AppUtil.startActivity(activity,btnStop,StroopResultActivity.class,null);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("personData",JsonUtils.toJson(personData));
+                    AppUtil.startActivity(activity,btnStop,StroopResultActivity.class,bundle);
+                    finish();
                 }
             });
             return;
@@ -243,7 +254,7 @@ public class StroopTestActivity extends BaseActivity<TestMvpView, TestPresenter>
         int trueCount = 0;
         long totalTime = 0;
         for (int i=0;i<list.size();i++){
-            StroopData.StroopDataItem item = new StroopData.StroopDataItem();
+            StroopData.StroopDataItem item = list.get(i);
             trueCount+=item.isResult()?1:0;
             totalTime+=item.getTime();
         }
@@ -252,7 +263,7 @@ public class StroopTestActivity extends BaseActivity<TestMvpView, TestPresenter>
         stroopData.setFalseCount(list.size()-trueCount);
         stroopData.setTrueCount(trueCount);
         stroopData.setTotalTime(totalTime);
-        stroopData.setSvgTime(totalTime/list.size());
+        stroopData.setSvgTime(totalTime*1.0f/list.size());
         String result = JsonUtils.toJson(stroopData);
         if(test==1){
             personData.setStroopA(result);
@@ -320,8 +331,10 @@ public class StroopTestActivity extends BaseActivity<TestMvpView, TestPresenter>
     @Override
     protected void onDestroy() {
         isTesting = false;
-        translateAnimation.cancel();
-        translateAnimation = null;
+        if(translateAnimation!=null) {
+            translateAnimation.cancel();
+            translateAnimation = null;
+        }
         super.onDestroy();
     }
 }

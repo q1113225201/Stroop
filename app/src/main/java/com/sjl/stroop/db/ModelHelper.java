@@ -31,6 +31,9 @@ public class ModelHelper {
      * 获取所有用户数据列表
      */
     public static List<PersonData> fetchPersonDataList(String key) {
+        if(TextUtils.isEmpty(key)){
+            return fetchAllPersonDataList();
+        }
         PersonDataDao personDataDao = GlobalData.getDbHelper().getDaoSession().getPersonDataDao();
         Query<PersonData> query = personDataDao.queryBuilder()
                 .whereOr(PersonDataDao.Properties.Idcard.like(key),
@@ -51,15 +54,19 @@ public class ModelHelper {
         Query<PersonData> query = personDataDao.queryBuilder()
                 .where(PersonDataDao.Properties.Idcard.eq(personData.getIdcard()))
                 .build();
-        if(query.list().size()>0){
-            return query.list().get(0);
+        if(!TextUtils.isEmpty(personData.getIdcard())) {
+            if (query.list().size() > 0) {
+                return query.list().get(0);
+            }
         }
         query = personDataDao.queryBuilder()
-                .where(PersonDataDao.Properties.Name.eq(personData.getName()),
-                PersonDataDao.Properties.Birth.eq(personData.getBirth()),
-                PersonDataDao.Properties.Gender.eq(personData.getGender()),
-                PersonDataDao.Properties.Job.eq(personData.getJob()),
-                PersonDataDao.Properties.Education.eq(personData.getEducation()))
+                .where(
+                    PersonDataDao.Properties.Name.eq(personData.getName()),
+                    PersonDataDao.Properties.Idcard.eq(personData.getIdcard()),
+                    PersonDataDao.Properties.Birth.eq(personData.getBirth()),
+                    PersonDataDao.Properties.Gender.eq(personData.getGender()),
+                    PersonDataDao.Properties.Job.eq(personData.getJob()),
+                    PersonDataDao.Properties.Education.eq(personData.getEducation()))
                 .build();
         return query.list().size()>0?query.list().get(0):null;
     }

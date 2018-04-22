@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ivSetting:
-
+                AppUtil.startActivity(this, v, SettingActivity.class, null);
                 break;
             case R.id.ivAdd:
                 AppUtil.startActivity(this, v, AddPersonActivity.class, null);

@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".ui.AddPersonActivity" />
         <activity android:name=".ui.StroopTestActivity" />
-        <activity android:name=".ui.StroopResultActivity"></activity>
+        <activity android:name=".ui.StroopResultActivity" />
+        <activity android:name=".ui.SettingActivity"></activity>
     </application>
 
 </manifest>

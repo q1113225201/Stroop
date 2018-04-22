@@ -1,7 +1,5 @@
 package com.sjl.stroop.model.pojo;
 
-import org.greenrobot.greendao.annotation.Entity;
-
 import java.util.List;
 
 /**
@@ -16,9 +14,9 @@ public class StroopData {
     //错误次数
     private int falseCount;
     //总时间 秒
-    private float totalTime;
+    private double totalTime;
     //平均时间 秒
-    private float svgTime;
+    private double svgTime;
     //每次测试数据
     private List<StroopDataItem> list;
 
@@ -38,19 +36,19 @@ public class StroopData {
         this.falseCount = falseCount;
     }
 
-    public float getTotalTime() {
+    public double getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(float totalTime) {
+    public void setTotalTime(double totalTime) {
         this.totalTime = totalTime;
     }
 
-    public float getSvgTime() {
+    public double getSvgTime() {
         return svgTime;
     }
 
-    public void setSvgTime(float svgTime) {
+    public void setSvgTime(double svgTime) {
         this.svgTime = svgTime;
     }
 

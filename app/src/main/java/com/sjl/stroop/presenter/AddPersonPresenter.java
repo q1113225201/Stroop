@@ -11,7 +11,6 @@ import com.sjl.stroop.mvpview.AddPersonMvpView;
  * @author 林zero
  * @date 2018/4/18
  */
-
 public class AddPersonPresenter extends BasePresenter<AddPersonMvpView> {
     /**
      * 保存用户信息

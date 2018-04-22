@@ -51,6 +51,8 @@ public class PersonDataAdapter extends RecyclerView.Adapter<PersonDataAdapter.Vi
         holder.tvGender.setText(personData.getGender());
         holder.tvState.setText(personData.getStroopState() ? "查看详情 >>" : "继续测试 >>");
         holder.tvState.setTextColor(ContextCompat.getColor(activity, personData.getStroopState() ? R.color.black : R.color.red));
+        holder.tvEducation.setText(personData.getEducation());
+        holder.tvJob.setText(personData.getJob());
         holder.addOnItemClickListener(personData);
     }
 
