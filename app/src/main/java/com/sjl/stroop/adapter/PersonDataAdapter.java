@@ -7,12 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sjl.platform.util.AppUtil;
-import com.sjl.platform.util.LogUtil;
+import com.sjl.platform.util.JsonUtils;
 import com.sjl.stroop.R;
 import com.sjl.stroop.model.pojo.PersonData;
 import com.sjl.stroop.ui.StroopResultActivity;
@@ -85,6 +83,7 @@ public class PersonDataAdapter extends RecyclerView.Adapter<PersonDataAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
+                    bundle.putString("personData", JsonUtils.toJson(personData));
                     AppUtil.startActivity(activity, v, personData.getStroopState() ? StroopResultActivity.class : StroopTestActivity.class, bundle);
                 }
             });

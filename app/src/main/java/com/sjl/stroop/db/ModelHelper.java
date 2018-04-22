@@ -46,24 +46,40 @@ public class ModelHelper {
     /**
      * 查找用户信息
      */
-    public static boolean findPersonData(PersonData personData) {
+    public static PersonData findPersonData(PersonData personData) {
         PersonDataDao personDataDao = GlobalData.getDbHelper().getDaoSession().getPersonDataDao();
         Query<PersonData> query = personDataDao.queryBuilder()
-                .where(PersonDataDao.Properties.Name.eq(personData.getName()),
-                        PersonDataDao.Properties.Birth.eq(personData.getBirth()),
-                        PersonDataDao.Properties.Gender.eq(personData.getGender()),
-                        PersonDataDao.Properties.Job.eq(personData.getJob()),
-                        PersonDataDao.Properties.Education.eq(personData.getEducation())
-                ).where(PersonDataDao.Properties.Idcard.eq(personData.getIdcard()))
+                .where(PersonDataDao.Properties.Idcard.eq(personData.getIdcard()))
                 .build();
-        return query.list().size() > 0;
+        if(query.list().size()>0){
+            return query.list().get(0);
+        }
+        query = personDataDao.queryBuilder()
+                .where(PersonDataDao.Properties.Name.eq(personData.getName()),
+                PersonDataDao.Properties.Birth.eq(personData.getBirth()),
+                PersonDataDao.Properties.Gender.eq(personData.getGender()),
+                PersonDataDao.Properties.Job.eq(personData.getJob()),
+                PersonDataDao.Properties.Education.eq(personData.getEducation()))
+                .build();
+        return query.list().size()>0?query.list().get(0):null;
     }
 
     /**
      * 保存用户信息
      */
-    public static void savePersonData(PersonData personData) {
+    public static PersonData savePersonData(PersonData personData) {
         PersonDataDao personDataDao = GlobalData.getDbHelper().getDaoSession().getPersonDataDao();
         personDataDao.save(personData);
+        return findPersonData(personData);
+    }
+
+    public static void updatePersonData(PersonData personData){
+        PersonDataDao personDataDao = GlobalData.getDbHelper().getDaoSession().getPersonDataDao();
+        PersonData updateData = findPersonData(personData);
+        updateData.setStroopA(personData.getStroopA());
+        updateData.setStroopB(personData.getStroopB());
+        updateData.setStroopC(personData.getStroopC());
+        updateData.setStroopState(personData.getStroopState());
+        personDataDao.update(updateData);
     }
 }

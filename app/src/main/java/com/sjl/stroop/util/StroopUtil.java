@@ -19,9 +19,9 @@ import java.util.Random;
 public class StroopUtil {
     private static ColorBean[] colorBeans = {
             new ColorBean(Color.RED,"红"),
-            new ColorBean(Color.GREEN,"红"),
-            new ColorBean(Color.YELLOW,"红"),
-            new ColorBean(Color.BLUE,"红"),
+            new ColorBean(Color.GREEN,"绿"),
+            new ColorBean(Color.YELLOW,"黄"),
+            new ColorBean(Color.BLUE,"蓝"),
     };
     /**
      * 获取24种颜色

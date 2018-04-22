@@ -15,7 +15,7 @@ import com.sjl.stroop.model.pojo.PersonData;
 /** 
  * DAO for table "PERSON_DATA".
 */
-public class PersonDataDao extends AbstractDao<PersonData, Void> {
+public class PersonDataDao extends AbstractDao<PersonData, Long> {
 
     public static final String TABLENAME = "PERSON_DATA";
 
@@ -24,16 +24,18 @@ public class PersonDataDao extends AbstractDao<PersonData, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Idcard = new Property(0, String.class, "idcard", false, "IDCARD");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property Birth = new Property(2, String.class, "birth", false, "BIRTH");
-        public final static Property Gender = new Property(3, String.class, "gender", false, "GENDER");
-        public final static Property Job = new Property(4, String.class, "job", false, "JOB");
-        public final static Property Education = new Property(5, String.class, "education", false, "EDUCATION");
-        public final static Property StroopA = new Property(6, String.class, "stroopA", false, "STROOP_A");
-        public final static Property StroopB = new Property(7, String.class, "stroopB", false, "STROOP_B");
-        public final static Property StroopC = new Property(8, String.class, "stroopC", false, "STROOP_C");
-        public final static Property StroopState = new Property(9, boolean.class, "stroopState", false, "STROOP_STATE");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property Time = new Property(1, Long.class, "time", false, "TIME");
+        public final static Property Idcard = new Property(2, String.class, "idcard", false, "IDCARD");
+        public final static Property Name = new Property(3, String.class, "name", false, "NAME");
+        public final static Property Birth = new Property(4, String.class, "birth", false, "BIRTH");
+        public final static Property Gender = new Property(5, String.class, "gender", false, "GENDER");
+        public final static Property Job = new Property(6, String.class, "job", false, "JOB");
+        public final static Property Education = new Property(7, String.class, "education", false, "EDUCATION");
+        public final static Property StroopA = new Property(8, String.class, "stroopA", false, "STROOP_A");
+        public final static Property StroopB = new Property(9, String.class, "stroopB", false, "STROOP_B");
+        public final static Property StroopC = new Property(10, String.class, "stroopC", false, "STROOP_C");
+        public final static Property StroopState = new Property(11, boolean.class, "stroopState", false, "STROOP_STATE");
     }
 
 
@@ -49,16 +51,18 @@ public class PersonDataDao extends AbstractDao<PersonData, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"PERSON_DATA\" (" + //
-                "\"IDCARD\" TEXT," + // 0: idcard
-                "\"NAME\" TEXT," + // 1: name
-                "\"BIRTH\" TEXT," + // 2: birth
-                "\"GENDER\" TEXT," + // 3: gender
-                "\"JOB\" TEXT," + // 4: job
-                "\"EDUCATION\" TEXT," + // 5: education
-                "\"STROOP_A\" TEXT," + // 6: stroopA
-                "\"STROOP_B\" TEXT," + // 7: stroopB
-                "\"STROOP_C\" TEXT," + // 8: stroopC
-                "\"STROOP_STATE\" INTEGER NOT NULL );"); // 9: stroopState
+                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"TIME\" INTEGER," + // 1: time
+                "\"IDCARD\" TEXT," + // 2: idcard
+                "\"NAME\" TEXT," + // 3: name
+                "\"BIRTH\" TEXT," + // 4: birth
+                "\"GENDER\" TEXT," + // 5: gender
+                "\"JOB\" TEXT," + // 6: job
+                "\"EDUCATION\" TEXT," + // 7: education
+                "\"STROOP_A\" TEXT," + // 8: stroopA
+                "\"STROOP_B\" TEXT," + // 9: stroopB
+                "\"STROOP_C\" TEXT," + // 10: stroopC
+                "\"STROOP_STATE\" INTEGER NOT NULL );"); // 11: stroopState
     }
 
     /** Drops the underlying database table. */
@@ -71,155 +75,182 @@ public class PersonDataDao extends AbstractDao<PersonData, Void> {
     protected final void bindValues(DatabaseStatement stmt, PersonData entity) {
         stmt.clearBindings();
  
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+ 
+        Long time = entity.getTime();
+        if (time != null) {
+            stmt.bindLong(2, time);
+        }
+ 
         String idcard = entity.getIdcard();
         if (idcard != null) {
-            stmt.bindString(1, idcard);
+            stmt.bindString(3, idcard);
         }
  
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(2, name);
+            stmt.bindString(4, name);
         }
  
         String birth = entity.getBirth();
         if (birth != null) {
-            stmt.bindString(3, birth);
+            stmt.bindString(5, birth);
         }
  
         String gender = entity.getGender();
         if (gender != null) {
-            stmt.bindString(4, gender);
+            stmt.bindString(6, gender);
         }
  
         String job = entity.getJob();
         if (job != null) {
-            stmt.bindString(5, job);
+            stmt.bindString(7, job);
         }
  
         String education = entity.getEducation();
         if (education != null) {
-            stmt.bindString(6, education);
+            stmt.bindString(8, education);
         }
  
         String stroopA = entity.getStroopA();
         if (stroopA != null) {
-            stmt.bindString(7, stroopA);
+            stmt.bindString(9, stroopA);
         }
  
         String stroopB = entity.getStroopB();
         if (stroopB != null) {
-            stmt.bindString(8, stroopB);
+            stmt.bindString(10, stroopB);
         }
  
         String stroopC = entity.getStroopC();
         if (stroopC != null) {
-            stmt.bindString(9, stroopC);
+            stmt.bindString(11, stroopC);
         }
-        stmt.bindLong(10, entity.getStroopState() ? 1L: 0L);
+        stmt.bindLong(12, entity.getStroopState() ? 1L: 0L);
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, PersonData entity) {
         stmt.clearBindings();
  
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+ 
+        Long time = entity.getTime();
+        if (time != null) {
+            stmt.bindLong(2, time);
+        }
+ 
         String idcard = entity.getIdcard();
         if (idcard != null) {
-            stmt.bindString(1, idcard);
+            stmt.bindString(3, idcard);
         }
  
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(2, name);
+            stmt.bindString(4, name);
         }
  
         String birth = entity.getBirth();
         if (birth != null) {
-            stmt.bindString(3, birth);
+            stmt.bindString(5, birth);
         }
  
         String gender = entity.getGender();
         if (gender != null) {
-            stmt.bindString(4, gender);
+            stmt.bindString(6, gender);
         }
  
         String job = entity.getJob();
         if (job != null) {
-            stmt.bindString(5, job);
+            stmt.bindString(7, job);
         }
  
         String education = entity.getEducation();
         if (education != null) {
-            stmt.bindString(6, education);
+            stmt.bindString(8, education);
         }
  
         String stroopA = entity.getStroopA();
         if (stroopA != null) {
-            stmt.bindString(7, stroopA);
+            stmt.bindString(9, stroopA);
         }
  
         String stroopB = entity.getStroopB();
         if (stroopB != null) {
-            stmt.bindString(8, stroopB);
+            stmt.bindString(10, stroopB);
         }
  
         String stroopC = entity.getStroopC();
         if (stroopC != null) {
-            stmt.bindString(9, stroopC);
+            stmt.bindString(11, stroopC);
         }
-        stmt.bindLong(10, entity.getStroopState() ? 1L: 0L);
+        stmt.bindLong(12, entity.getStroopState() ? 1L: 0L);
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public PersonData readEntity(Cursor cursor, int offset) {
         PersonData entity = new PersonData( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // idcard
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // birth
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // gender
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // job
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // education
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // stroopA
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // stroopB
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // stroopC
-            cursor.getShort(offset + 9) != 0 // stroopState
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // time
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // idcard
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // name
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // birth
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // gender
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // job
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // education
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // stroopA
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // stroopB
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // stroopC
+            cursor.getShort(offset + 11) != 0 // stroopState
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, PersonData entity, int offset) {
-        entity.setIdcard(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setBirth(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setGender(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setJob(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setEducation(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setStroopA(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setStroopB(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setStroopC(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setStroopState(cursor.getShort(offset + 9) != 0);
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setTime(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
+        entity.setIdcard(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setBirth(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setGender(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setJob(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setEducation(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setStroopA(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setStroopB(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setStroopC(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setStroopState(cursor.getShort(offset + 11) != 0);
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(PersonData entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final Long updateKeyAfterInsert(PersonData entity, long rowId) {
+        entity.setId(rowId);
+        return rowId;
     }
     
     @Override
-    public Void getKey(PersonData entity) {
-        return null;
+    public Long getKey(PersonData entity) {
+        if(entity != null) {
+            return entity.getId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(PersonData entity) {
-        // TODO
-        return false;
+        return entity.getId() != null;
     }
 
     @Override

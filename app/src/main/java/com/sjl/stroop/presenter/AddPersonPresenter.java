@@ -17,11 +17,12 @@ public class AddPersonPresenter extends BasePresenter<AddPersonMvpView> {
      * 保存用户信息
      */
     public void savePerson(PersonData personData) {
-        if (ModelHelper.findPersonData(personData)) {
-            getMvpView().onAddPersonFailure("用户已存在");
+        PersonData result =ModelHelper.findPersonData(personData);
+        if (result!=null) {
+            getMvpView().onAddPersonFailure(result,"用户已存在");
         } else {
-            ModelHelper.savePersonData(personData);
-            getMvpView().onAddPersonSuccess();
+            result = ModelHelper.savePersonData(personData);
+            getMvpView().onAddPersonSuccess(result);
         }
     }
 }

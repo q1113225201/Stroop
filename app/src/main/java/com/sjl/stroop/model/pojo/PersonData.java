@@ -2,6 +2,7 @@ package com.sjl.stroop.model.pojo;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * PersonData
@@ -11,7 +12,9 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class PersonData {
-
+    @Id
+    private Long id;
+    private Long time;
     //身份证
     private String idcard;
     //姓名
@@ -32,11 +35,12 @@ public class PersonData {
     private String stroopC;
     //测试结果：true 已完成 false 未完成
     private boolean stroopState;
-
-    @Generated(hash = 1978155298)
-    public PersonData(String idcard, String name, String birth, String gender,
-            String job, String education, String stroopA, String stroopB,
-            String stroopC, boolean stroopState) {
+    @Generated(hash = 793133653)
+    public PersonData(Long id, Long time, String idcard, String name, String birth,
+            String gender, String job, String education, String stroopA,
+            String stroopB, String stroopC, boolean stroopState) {
+        this.id = id;
+        this.time = time;
         this.idcard = idcard;
         this.name = name;
         this.birth = birth;
@@ -50,6 +54,12 @@ public class PersonData {
     }
     @Generated(hash = 212076876)
     public PersonData() {
+    }
+    public Long getId() {
+        return this.id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getIdcard() {
         return this.idcard;
@@ -111,5 +121,10 @@ public class PersonData {
     public void setStroopState(boolean stroopState) {
         this.stroopState = stroopState;
     }
-
+    public Long getTime() {
+        return this.time;
+    }
+    public void setTime(Long time) {
+        this.time = time;
+    }
 }

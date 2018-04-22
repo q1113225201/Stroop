@@ -23,7 +23,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
-        PlatformInit.init(this);
+        PlatformInit.init(this).setDebug(true);
         GlobalData.getInstance().init();
     }
 }

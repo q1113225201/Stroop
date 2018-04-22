@@ -1,6 +1,7 @@
 package com.sjl.stroop.mvpview;
 
 import com.sjl.platform.base.MvpView;
+import com.sjl.stroop.model.pojo.PersonData;
 
 /**
  * 人员添加
@@ -10,6 +11,6 @@ import com.sjl.platform.base.MvpView;
  */
 
 public interface AddPersonMvpView extends MvpView {
-    void onAddPersonSuccess();
-    void onAddPersonFailure(String msg);
+    void onAddPersonSuccess(PersonData personData);
+    void onAddPersonFailure(PersonData personData,String msg);
 }

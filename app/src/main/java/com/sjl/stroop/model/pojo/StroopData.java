@@ -69,10 +69,12 @@ public class StroopData {
         private int textColor;
         //文字
         private String text;
+        //选择颜色
+        private ColorBean selectColorBean;
         //测试结果
-        private boolean result;
+        private boolean result = false;
         //使用时间 毫秒
-        private int time;
+        private long time;
 
         public int getBoxColor() {
             return boxColor;
@@ -98,6 +100,14 @@ public class StroopData {
             this.text = text;
         }
 
+        public ColorBean getSelectColorBean() {
+            return selectColorBean;
+        }
+
+        public void setSelectColorBean(ColorBean selectColorBean) {
+            this.selectColorBean = selectColorBean;
+        }
+
         public boolean isResult() {
             return result;
         }
@@ -106,11 +116,11 @@ public class StroopData {
             this.result = result;
         }
 
-        public int getTime() {
+        public long getTime() {
             return time;
         }
 
-        public void setTime(int time) {
+        public void setTime(long time) {
             this.time = time;
         }
     }

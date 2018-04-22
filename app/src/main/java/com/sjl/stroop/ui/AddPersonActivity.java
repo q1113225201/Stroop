@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,10 +14,14 @@ import android.widget.RadioButton;
 
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
+import com.sjl.platform.PlatformInit;
 import com.sjl.platform.base.BaseActivity;
 import com.sjl.platform.util.AppUtil;
+import com.sjl.platform.util.JsonUtils;
 import com.sjl.platform.widget.PopWindow;
+import com.sjl.stroop.App;
 import com.sjl.stroop.R;
+import com.sjl.stroop.model.GlobalData;
 import com.sjl.stroop.model.pojo.PersonData;
 import com.sjl.stroop.mvpview.AddPersonMvpView;
 import com.sjl.stroop.presenter.AddPersonPresenter;
@@ -58,6 +64,7 @@ public class AddPersonActivity extends BaseActivity<AddPersonMvpView, AddPersonP
 
     @Override
     protected void initView() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         ivBack.setOnClickListener(this);
         etBirth.setOnClickListener(this);
         etEducation.setOnClickListener(this);
@@ -77,6 +84,7 @@ public class AddPersonActivity extends BaseActivity<AddPersonMvpView, AddPersonP
 
     @Override
     public void onClick(View v) {
+        inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
         switch (v.getId()) {
             case R.id.ivBack:
                 onBackPressed();
@@ -117,6 +125,7 @@ public class AddPersonActivity extends BaseActivity<AddPersonMvpView, AddPersonP
             return;
         }
         PersonData personData = new PersonData();
+        personData.setTime(System.currentTimeMillis());
         personData.setName(name);
         personData.setIdcard(idcard);
         personData.setGender(gender);
@@ -203,17 +212,19 @@ public class AddPersonActivity extends BaseActivity<AddPersonMvpView, AddPersonP
     }
 
     @Override
-    public void onAddPersonSuccess() {
+    public void onAddPersonSuccess(PersonData personData) {
         showToast("资料已添加，下面进行测试。。。");
         Bundle bundle = new Bundle();
+        bundle.putString("personData", JsonUtils.toJson(personData));
         AppUtil.startActivity(this, btnConfirm, StroopTestActivity.class, bundle);
         finish();
     }
 
     @Override
-    public void onAddPersonFailure(String msg) {
+    public void onAddPersonFailure(PersonData personData, String msg) {
         showToast(msg);
         Bundle bundle = new Bundle();
+        bundle.putString("personData", JsonUtils.toJson(personData));
         AppUtil.startActivity(this, btnConfirm, StroopTestActivity.class, bundle);
         finish();
     }
