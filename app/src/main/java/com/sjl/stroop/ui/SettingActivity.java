@@ -33,8 +33,8 @@ import butterknife.BindView;
   */
 public class SettingActivity extends BaseActivity<SettingMvpView,SettingPresenter> implements SettingMvpView {
 
-    @BindView(R.id.tvShare)
-    TextView tvShare;
+    @BindView(R.id.tvExport)
+    TextView tvExport;
     @Override
     protected int getContentViewId() {
         return R.layout.activity_setting;
@@ -42,7 +42,7 @@ public class SettingActivity extends BaseActivity<SettingMvpView,SettingPresente
 
     @Override
     protected void initView() {
-        tvShare.setOnClickListener(this);
+        tvExport.setOnClickListener(this);
     }
 
     @Override
@@ -59,13 +59,13 @@ public class SettingActivity extends BaseActivity<SettingMvpView,SettingPresente
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tvShare:
-                share();
+            case R.id.tvExport:
+                export();
                 break;
         }
     }
 
-    private void share() {
+    private void export() {
         PermisstionUtil.requestPermissions(this, PermisstionUtil.STORAGE, 100, "导出数据和分享数据需要读写权限", new PermisstionUtil.OnPermissionResult() {
             @Override
             public void granted(int requestCode) {

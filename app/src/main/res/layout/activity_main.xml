@@ -40,14 +40,21 @@
     <RelativeLayout
         android:id="@+id/rlSearch"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/llTitle"
+        android:layout_margin="5dp"
+        android:background="@drawable/bg_input"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/etKey"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/ic_search"
+            android:background="@null"
+            android:hint="请输入关键字" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
