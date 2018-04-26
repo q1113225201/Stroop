@@ -208,8 +208,7 @@ public class FileUtil {
      * @return
      * @throws IOException
      */
-    public static boolean writeFileByNio(String filePath, String content,
-                                         boolean append) throws IOException {
+    public static boolean writeFileByNio(String filePath, String content, boolean append) throws IOException {
         if (TextUtils.isEmpty(filePath))
             return false;
         if (TextUtils.isEmpty(content))

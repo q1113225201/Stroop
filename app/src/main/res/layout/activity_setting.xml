@@ -40,17 +40,47 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/llTitle"
         android:orientation="vertical"
+        android:id="@+id/llExport"
         android:layout_marginTop="20dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:id="@+id/tvExport"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:text="导出"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llExport"
+        android:orientation="vertical"
+        android:id="@+id/llDelete"
+        android:layout_marginTop="1dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="删除"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llDelete"
+        android:id="@+id/llShare"
+        android:orientation="vertical"
+        android:layout_marginTop="1dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="分享"/>
     </LinearLayout>
 </RelativeLayout>

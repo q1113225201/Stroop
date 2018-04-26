@@ -1,18 +1,17 @@
 package com.sjl.stroop.ui;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sjl.platform.base.BaseActivity;
 import com.sjl.platform.util.FileUtil;
 import com.sjl.platform.util.JsonUtils;
 import com.sjl.platform.util.PermisstionUtil;
+import com.sjl.platform.util.ShareUtil;
 import com.sjl.platform.util.ToastUtil;
-import com.sjl.platform.util.UriUtil;
 import com.sjl.stroop.R;
 import com.sjl.stroop.db.ModelHelper;
 import com.sjl.stroop.model.pojo.PersonData;
@@ -26,15 +25,20 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
-  * 设置
-  *
-  * @author 林zero
-  * @date 2018/4/22
-  */
-public class SettingActivity extends BaseActivity<SettingMvpView,SettingPresenter> implements SettingMvpView {
+ * 设置
+ *
+ * @author 林zero
+ * @date 2018/4/22
+ */
+public class SettingActivity extends BaseActivity<SettingMvpView, SettingPresenter> implements SettingMvpView {
 
-    @BindView(R.id.tvExport)
-    TextView tvExport;
+    @BindView(R.id.llExport)
+    LinearLayout llExport;
+    @BindView(R.id.llDelete)
+    LinearLayout llDelete;
+    @BindView(R.id.llShare)
+    LinearLayout llShare;
+
     @Override
     protected int getContentViewId() {
         return R.layout.activity_setting;
@@ -42,7 +46,9 @@ public class SettingActivity extends BaseActivity<SettingMvpView,SettingPresente
 
     @Override
     protected void initView() {
-        tvExport.setOnClickListener(this);
+        llExport.setOnClickListener(this);
+        llDelete.setOnClickListener(this);
+        llShare.setOnClickListener(this);
     }
 
     @Override
@@ -58,26 +64,39 @@ public class SettingActivity extends BaseActivity<SettingMvpView,SettingPresente
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.tvExport:
-                export();
+        switch (v.getId()) {
+            case R.id.llExport:
+                fileAction(1);
+                break;
+            case R.id.llDelete:
+                fileAction(2);
+                break;
+            case R.id.llShare:
+                fileAction(3);
                 break;
         }
     }
 
-    private void export() {
+    private void fileAction(final int type) {
         PermisstionUtil.requestPermissions(this, PermisstionUtil.STORAGE, 100, "导出数据和分享数据需要读写权限", new PermisstionUtil.OnPermissionResult() {
             @Override
             public void granted(int requestCode) {
                 List<PersonData> list = ModelHelper.fetchAllPersonDataList();
                 String result = JsonUtils.toJson(list);
-                    String path = Environment.getExternalStorageDirectory()+"/Stroop/stroop.dat";
-                    try {
-                        FileUtil.writeFile(path,result,true);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    ToastUtil.showToast("数据已导出，文件路径："+path);
+                String path = Environment.getExternalStorageDirectory() + "/Stroop/stroop.db";
+                try {
+                    FileUtil.writeFileByNio(path, result, false);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(type==1){
+                    ToastUtil.showToast("数据已导出，文件路径：" + path);
+                }else if(type==2){
+                    FileUtil.deleteFile(path);
+                    ToastUtil.showToast("文件已删除");
+                }else if(type==3){
+                    ShareUtil.shareFile(activity, new File(path));
+                }
             }
 
             @Override
@@ -87,18 +106,6 @@ public class SettingActivity extends BaseActivity<SettingMvpView,SettingPresente
         });
     }
 
-    /**
-     * 文件分享
-     * @param context
-     * @param file
-     */
-    public void shareFile(Context context, File file){
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_STREAM, UriUtil.getFileUri(context,file));
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
