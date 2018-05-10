@@ -146,7 +146,7 @@ public class AddPersonActivity extends BaseActivity<AddPersonMvpView, AddPersonP
                     view.findViewById(R.id.tvCancel).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            educationPop.dismiss();
+                            datePop.dismiss();
                         }
                     });
                     view.findViewById(R.id.tvConfirm).setOnClickListener(new View.OnClickListener() {
